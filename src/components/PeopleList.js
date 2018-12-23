@@ -1,11 +1,21 @@
-import React, { Component } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
+import Person from './Person';
 
-class PeopleList extends Component {
-    render() {
-        return (
-            
-        );
-    }
+const PeopleList = ({ hand }) => {
+    const listItems = hand.map(person => (
+        <Person key={person.id} details={person} />
+    ));
+    
+    return (
+        <div>
+            {listItems}
+        </div>
+    );
+}
+
+PeopleList.propTypes = {
+    hand: PropTypes.array
 }
 
 export default PeopleList;

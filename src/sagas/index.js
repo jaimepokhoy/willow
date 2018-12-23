@@ -1,5 +1,5 @@
 import { put, takeLatest, call } from 'redux-saga/effects';
-import { SHOW_LOADING, REQUEST_SUCCESS, GET_PEOPLE, REQUEST_ERROR } from './../actions';
+import { SHOW_LOADING, REQUEST_SUCCESS, REQUEST_PEOPLE, REQUEST_ERROR } from './../actions';
 import axios from 'axios';
 
 function fetchPeople() {
@@ -10,7 +10,7 @@ function fetchPeople() {
 }
 
 function* getPeople() {
-    yield put(SHOW_LOADING, { isLoading: true });
+    // yield put(SHOW_LOADING, { isLoading: true });
     try {
         const response = yield call(fetchPeople);
         const people = response.data;
@@ -22,5 +22,5 @@ function* getPeople() {
 }
 
 export default function* watcherSaga() {
-    yield takeLatest(GET_PEOPLE, getPeople);
+    yield takeLatest(REQUEST_PEOPLE, getPeople);
 }

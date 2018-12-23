@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import PeopleList from './PeopleList';
 import { connect } from 'react-redux';
-import { GET_PEOPLE } from '../actions';
+import { REQUEST_PEOPLE } from '../actions';
+import PropTypes from 'prop-types';
+import shuffle from 'lodash/shuffle';
+
 
 class Game extends Component {
     componentDidMount() {
@@ -11,11 +14,20 @@ class Game extends Component {
     }
 
     render() {
+        const { people } = this.props;
+
+        const hand = shuffle(people.slice(0, 5));
+
         return (
-            <PeopleList />
+            <PeopleList hand={hand} />
         );
     }
 }
+
+Game.propTypes = {
+    onRequestPeople: PropTypes.func,
+    people: PropTypes.array
+};
 
 function mapStateToProps(state) {
     const { people } = state;
@@ -25,7 +37,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        onRequestPeople: () => dispatch({ type: GET_PEOPLE })
+        onRequestPeople: () => dispatch({ type: REQUEST_PEOPLE })
     };
 }
 

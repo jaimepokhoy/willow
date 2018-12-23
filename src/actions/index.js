@@ -4,7 +4,8 @@
 
 export const SHOW_LOADING = 'SHOW_LOADING'
 export const REQUEST_SUCCESS = 'REQUEST_SUCCESS'
-export const GET_PEOPLE = 'GET_PEOPLE'
+export const REQUEST_PEOPLE = 'REQUEST_PEOPLE'
+export const REQUEST_ERROR = 'REQUEST_ERROR'
 
 /*
  * action creators
@@ -17,16 +18,9 @@ export function addTodo(text) {
     }
 }
 
-export function toggleTodo(index) {
-    return {
-        type: TOGGLE_TODO,
-        index
-    }
-}
-
 export function setVisibilityFilter(filter) {
     return {
-        type: GET_PEOPLE,
+        type: REQUEST_PEOPLE,
         filter
     }
 }
