@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Person from './Person';
+import { Grid, Row } from 'react-bootstrap';
 
 const PeopleList = ({ hand }) => {
     const listItems = hand.map(person => (
@@ -8,9 +9,11 @@ const PeopleList = ({ hand }) => {
     ));
     
     return (
-        <div>
-            {listItems}
-        </div>
+        <Grid>
+            <Row>
+                {listItems}
+            </Row>
+        </Grid>
     );
 }
 

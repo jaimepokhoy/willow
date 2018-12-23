@@ -1,9 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Col, Image } from 'react-bootstrap';
 
 const Person = ({ details }) => {
     return (
-        <div>{details.firstName}</div>
+        <Col md={2}>
+            <Image src={details.headshot.url} rounded responsive />
+            {details.firstName}
+        </Col>
     );
 }
 

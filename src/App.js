@@ -8,11 +8,11 @@ class App extends Component {
     return (
       <Grid>
         <Row className="show-grid">
-          <Col xs={4} md={3}>
+          <Col xs={4} md={2}>
             <h3>Name Game</h3>
             <ModeList />
           </Col>
-          <Col xs={14} md={9}>
+          <Col xs={14} md={10}>
             <Game />
           </Col>
         </Row>

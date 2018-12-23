@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { REQUEST_PEOPLE } from '../actions';
 import PropTypes from 'prop-types';
 import shuffle from 'lodash/shuffle';
+import random from 'lodash/random';
 
 
 class Game extends Component {
@@ -15,11 +16,21 @@ class Game extends Component {
 
     render() {
         const { people } = this.props;
+        let target;
+        let targetName;
 
         const hand = shuffle(people.slice(0, 5));
+        if (hand.length) {
+            target = hand[random(4)];
+            targetName = `${target.firstName} ${target.lastName}`;
+        }
+
 
         return (
-            <PeopleList hand={hand} />
+            <div>
+                {hand && <h1>Who is {targetName}</h1>}
+                <PeopleList hand={hand} />
+            </div>
         );
     }
 }
