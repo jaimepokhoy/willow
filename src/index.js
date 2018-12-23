@@ -5,11 +5,17 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
+import createSagaMiddleware from 'redux-saga';
+import watcherSaga from './sagas';
 import gameReducer from './reducers/gameReducer';
 import { Provider } from 'react-redux';
 
-const store = createStore(gameReducer);
+const sagaMiddleware = createSagaMiddleware();
+const store = createStore(gameReducer,
+        applyMiddleware(sagaMiddleware)
+    );
+sagaMiddleware.run(watcherSaga);
 
 ReactDOM.render(
     <Provider store={store}>

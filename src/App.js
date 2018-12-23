@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Grid, Row, Col } from 'react-bootstrap';
 import ModeList from './components/ModeList';
+import Game from './components/Game';
 
 class App extends Component {
   render() {
@@ -12,6 +13,7 @@ class App extends Component {
             <ModeList />
           </Col>
           <Col xs={14} md={9}>
+            <Game />
           </Col>
         </Row>
       </Grid>
