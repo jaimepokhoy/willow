@@ -8,6 +8,7 @@ class App extends Component {
       <Grid>
         <Row className="show-grid">
           <Col xs={4} md={3}>
+            <h3>Name Game</h3>
             <ModeList />
           </Col>
           <Col xs={14} md={9}>

@@ -6,6 +6,8 @@ class ModeList extends Component {
         return (
             <ListGroup>
                 <ListGroupItem>Classic</ListGroupItem>
+                <ListGroupItem>Team</ListGroupItem>
+                <ListGroupItem>Mat*</ListGroupItem>
                 <ListGroupItem>Hint</ListGroupItem>
             </ListGroup>
         );
