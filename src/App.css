@@ -3,6 +3,11 @@
 }
 
 .red {
-  background: rgb(223, 86, 86);
+  color: rgb(223, 86, 86);
+  transition: all .3s linear;
+}
+
+.green {
+  color: rgb(125, 166, 134);
   transition: all .3s linear;
 }

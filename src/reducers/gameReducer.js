@@ -25,14 +25,18 @@ const gameReducer = (state = initialState, action) => {
             const { target, hand } = state;
             const { person: selected } = action;
             let isWon = false;
-            let updatedHand;
 
             if (selected.id === target.id) {
                 isWon = true;
             }
 
-            updatedHand = hand.map(person => {
-                if (person.id === selected.id) {
+            const updatedHand = hand.map(person => {
+                if (person.id === selected.id && person.id === target.id) {
+                    return Object.assign({}, person, {
+                        clicked: true,
+                        isTarget: true
+                    })
+                } else if (person.id === selected.id) {
                     return Object.assign({}, person, {
                         clicked: true
                     })
