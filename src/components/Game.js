@@ -4,8 +4,15 @@ import Winner from './Winner';
 import { connect } from 'react-redux';
 import { REQUEST_PEOPLE, makeSelection, nextRound } from '../actions';
 import PropTypes from 'prop-types';
+import { css } from 'react-emotion';
+import { ClipLoader } from 'react-spinners';
+import './../App.css';
 
-
+const override = css `
+    display: block;
+    margin: 0 auto;
+    border-color: red;
+`;
 
 class Game extends Component {
     componentDidMount() {
@@ -15,12 +22,21 @@ class Game extends Component {
     }
 
     render() {
-        const { onHandleSelect, hand, target, isWon, onNextRound } = this.props;
+        const { onHandleSelect, hand, loading, target, isWon, onNextRound } = this.props;
 
         return (
             <div>
                 {hand.length && <h1>Who is {target.firstName} {target.lastName}</h1>}
-                <PeopleList hand={hand} handleSelect={onHandleSelect} />
+                {loading ? (
+                    <div className='center'>
+                        <ClipLoader
+                            className={override}
+                            loading={true}
+                        />
+                    </div>
+                ) : (
+                    <PeopleList hand={hand} handleSelect={onHandleSelect} />
+                )}
                 {isWon && <Winner handleNext={onNextRound} />}
             </div>
         );
@@ -30,6 +46,7 @@ class Game extends Component {
 Game.propTypes = {
     hand: PropTypes.array,
     isWon: PropTypes.bool,
+    loading: PropTypes.bool,
     onHandleSelect: PropTypes.func,
     onNextRound: PropTypes.func,
     onRequestPeople: PropTypes.func,
@@ -38,9 +55,9 @@ Game.propTypes = {
 };
 
 function mapStateToProps(state) {
-    const { people, hand, target, isWon } = state;
+    const { people, hand, target, isWon, loading } = state;
 
-    return { people, hand, target, isWon };
+    return { people, hand, target, isWon, loading };
 }
 
 function mapDispatchToProps(dispatch) {

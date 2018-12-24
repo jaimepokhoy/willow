@@ -10,8 +10,6 @@ class App extends Component {
   render() {
     const { gameMode, gameModes, onModeChange } = this.props;
 
-    console.log(gameModes);
-
     return (
       <Grid>
         <Row className="show-grid">

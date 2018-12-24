@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@emotion/core": "^10.0.5",
     "axios": "^0.18.0",
     "lodash": "^4.17.11",
     "prop-types": "^15.6.2",
@@ -11,6 +12,7 @@
     "react-dom": "^16.7.0",
     "react-redux": "^6.0.0",
     "react-scripts": "2.1.1",
+    "react-spinners": "^0.4.8",
     "redux": "^4.0.1",
     "redux-saga": "^0.16.2"
   },

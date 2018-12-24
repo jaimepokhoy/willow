@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Col, Image } from 'react-bootstrap';
-import './Person.css';
 
 const Person = ({ details, personSelect }) => {
     return (

@@ -8,6 +8,7 @@ const initialState = {
     currPag: 0,
     isWon: false,
     target: null,
+    loading: false,
     gameMode: 'Classic',
     gameModes: [
         'Classic',
@@ -47,10 +48,10 @@ const gameReducer = (state = initialState, action) => {
             };
         }
         case REQUEST_PEOPLE:
-            return { ...state, fetching: true, error: null }
+            return { ...state, loading: true, error: null }
         case REQUEST_SUCCESS:
             return { ...state,
-                fetching: false,
+                loading: false,
                 people: action.people,
             };
         case NEXT_ROUND: {
