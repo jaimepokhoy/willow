@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import Person from './Person';
 import { Grid, Row } from 'react-bootstrap';
 
-const PeopleList = ({ hand }) => {
+const PeopleList = ({ hand, handleSelect }) => {
     const listItems = hand.map(person => (
-        <Person key={person.id} details={person} />
+        <Person key={person.id} details={person} personSelect={() => handleSelect(person)}/>
     ));
     
     return (
@@ -18,7 +18,8 @@ const PeopleList = ({ hand }) => {
 }
 
 PeopleList.propTypes = {
-    hand: PropTypes.array
+    hand: PropTypes.array,
+    handleSelect: PropTypes.func
 }
 
 export default PeopleList;

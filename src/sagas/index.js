@@ -1,5 +1,5 @@
 import { put, takeLatest, call } from 'redux-saga/effects';
-import { SHOW_LOADING, REQUEST_SUCCESS, REQUEST_PEOPLE, REQUEST_ERROR } from './../actions';
+import { SHOW_LOADING, NEXT_ROUND, REQUEST_SUCCESS, REQUEST_PEOPLE, REQUEST_ERROR } from './../actions';
 import axios from 'axios';
 
 function fetchPeople() {
@@ -16,6 +16,7 @@ function* getPeople() {
         const people = response.data;
 
         yield put({ type: REQUEST_SUCCESS, people });
+        yield put({ type: NEXT_ROUND });
     } catch (error) {
         yield put({ type: REQUEST_ERROR, error });
     }

@@ -6,15 +6,17 @@ export const SHOW_LOADING = 'SHOW_LOADING'
 export const REQUEST_SUCCESS = 'REQUEST_SUCCESS'
 export const REQUEST_PEOPLE = 'REQUEST_PEOPLE'
 export const REQUEST_ERROR = 'REQUEST_ERROR'
+export const SELECT_PERSON = 'SELECT_PERSON'
+export const NEXT_ROUND = 'NEXT_ROUND'
 
 /*
  * action creators
  */
 
-export function addTodo(text) {
+export function makeSelection(person) {
     return {
-        type: SHOW_LOADING,
-        text
+        type: SELECT_PERSON,
+        person
     }
 }
 
