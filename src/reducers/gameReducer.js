@@ -7,7 +7,15 @@ const initialState = {
     hand: [],
     currPag: 0,
     isWon: false,
-    target: null
+    target: null,
+    gameMode: 'Classic',
+    gameModes: [
+        'Classic',
+        'Hint',
+        'Mat(*)',
+        'Hard',
+        'Team'
+    ]
 }
 
 const gameReducer = (state = initialState, action) => {
