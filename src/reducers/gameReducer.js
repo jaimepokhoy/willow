@@ -46,14 +46,16 @@ const gameReducer = (state = initialState, action) => {
                 people: action.people,
             };
         case NEXT_ROUND: {
+
             const { currPag, people } = state;
-            const start = currPag * 5 || 1;
+            const start = currPag * 5;
             const end = start + 5;
             const hand = shuffle(people.slice(start, end));
 
             return { ...state,
                 hand,
-                currPag: state.currPag++,
+                isWon: false,
+                currPag: currPag + 1,
                 target: people.slice(start, end)[random(4)]
             }
         }

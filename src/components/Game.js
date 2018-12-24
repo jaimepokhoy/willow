@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import PeopleList from './PeopleList';
+import Winner from './Winner';
 import { connect } from 'react-redux';
-import { REQUEST_PEOPLE, makeSelection } from '../actions';
+import { REQUEST_PEOPLE, makeSelection, nextRound } from '../actions';
 import PropTypes from 'prop-types';
 
 
@@ -14,15 +15,13 @@ class Game extends Component {
     }
 
     render() {
-        const { onHandleSelect, hand, target, isWon } = this.props;
-
-        console.log(hand);
+        const { onHandleSelect, hand, target, isWon, onNextRound } = this.props;
 
         return (
             <div>
-                {hand.length && <h1>Whos is {target.firstName} {target.lastName}</h1>}
-                <PeopleList hand={hand} handleSelect={onHandleSelect}/>
-                {isWon && <h2>Great Job!</h2>}
+                {hand.length && <h1>Who is {target.firstName} {target.lastName}</h1>}
+                <PeopleList hand={hand} handleSelect={onHandleSelect} />
+                {isWon && <Winner handleNext={onNextRound} />}
             </div>
         );
     }
@@ -32,6 +31,7 @@ Game.propTypes = {
     hand: PropTypes.array,
     isWon: PropTypes.bool,
     onHandleSelect: PropTypes.func,
+    onNextRound: PropTypes.func,
     onRequestPeople: PropTypes.func,
     people: PropTypes.array,
     target: PropTypes.object
@@ -45,6 +45,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
+        onNextRound: () => dispatch(nextRound()),
         onRequestPeople: () => dispatch({ type: REQUEST_PEOPLE }),
         onHandleSelect: person => dispatch(makeSelection(person))
     };

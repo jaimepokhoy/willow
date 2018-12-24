@@ -20,6 +20,12 @@ export function makeSelection(person) {
     }
 }
 
+export function nextRound() {
+    return {
+        type: NEXT_ROUND
+    }
+}
+
 export function setVisibilityFilter(filter) {
     return {
         type: REQUEST_PEOPLE,
