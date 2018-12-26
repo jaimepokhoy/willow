@@ -16,8 +16,10 @@ const override = css `
 
 class Game extends Component {
     componentDidMount() {
-        if (this.props.people.length === 0) {
-            this.props.onRequestPeople()
+        const { people, onRequestPeople } = this.props;
+
+        if (people.length === 0) {
+            onRequestPeople()
         }
     }
 
