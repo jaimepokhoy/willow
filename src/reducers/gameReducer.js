@@ -1,4 +1,4 @@
-import { REQUEST_SUCCESS, REQUEST_PEOPLE, SELECT_PERSON, NEXT_ROUND } from './../actions';
+import { REQUEST_SUCCESS, REQUEST_PEOPLE, SELECT_PERSON, NEXT_ROUND, CHANGE_MODE } from './../actions';
 import shuffle from 'lodash/shuffle';
 import random from 'lodash/random';
 
@@ -59,7 +59,6 @@ const gameReducer = (state = initialState, action) => {
                 people: action.people,
             };
         case NEXT_ROUND: {
-
             const { currPag, people } = state;
             const start = currPag * 5;
             const end = start + 5;
@@ -71,6 +70,11 @@ const gameReducer = (state = initialState, action) => {
                 currPag: currPag + 1,
                 target: people.slice(start, end)[random(4)]
             }
+        }
+        case CHANGE_MODE: {
+            return { ...state,
+                gameMode: action.mode
+            };
         }
         default:
             return state;

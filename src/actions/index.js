@@ -27,9 +27,10 @@ export function nextRound() {
     }
 }
 
-export function modeChange() {
+export function modeChange(mode) {
     return {
-        type: CHANGE_MODE
+        type: CHANGE_MODE,
+        mode
     }
 }
 

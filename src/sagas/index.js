@@ -1,5 +1,5 @@
 import { put, takeLatest, call } from 'redux-saga/effects';
-import { SHOW_LOADING, NEXT_ROUND, REQUEST_SUCCESS, REQUEST_PEOPLE, REQUEST_ERROR } from './../actions';
+import { NEXT_ROUND, REQUEST_SUCCESS, REQUEST_PEOPLE, REQUEST_ERROR } from './../actions';
 import axios from 'axios';
 
 function fetchPeople() {
@@ -10,7 +10,6 @@ function fetchPeople() {
 }
 
 function* getPeople() {
-    // yield put(SHOW_LOADING, { isLoading: true });
     try {
         const response = yield call(fetchPeople);
         const people = response.data;
