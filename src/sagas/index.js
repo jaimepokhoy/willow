@@ -1,5 +1,5 @@
 import { put, takeLatest, call } from 'redux-saga/effects';
-import { NEXT_ROUND, REQUEST_SUCCESS, REQUEST_PEOPLE, REQUEST_ERROR } from './../actions';
+import { NEXT_ROUND, REQUEST_SUCCESS, REQUEST_PEOPLE, CHANGE_MODE, REQUEST_ERROR, nextRound } from './../actions';
 import axios from 'axios';
 
 function fetchPeople() {
@@ -21,6 +21,11 @@ function* getPeople() {
     }
 }
 
+function* changeMode() {
+    yield put(nextRound());
+}
+
 export default function* watcherSaga() {
     yield takeLatest(REQUEST_PEOPLE, getPeople);
+    yield takeLatest(CHANGE_MODE, changeMode);
 }

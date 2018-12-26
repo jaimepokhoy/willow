@@ -80,11 +80,14 @@ const gameReducer = (state = initialState, action) => {
 
             if (mode === 'Team') {
                 newPeople = people.filter(person => person.jobTitle);
+            } else if (mode === 'Mat(*)') {
+                newPeople = people.filter(person => person.firstName.startsWith('Mat'));
             }
 
             return { ...state,
                 gameMode: action.mode,
-                people: newPeople
+                people: newPeople,
+                currPag: 0
             };
         }
         case GIVE_HINT: {
