@@ -22,12 +22,14 @@ const initialState = {
 const gameReducer = (state = initialState, action) => {
     switch(action.type) {
         case SELECT_PERSON: {
-            const { target, hand } = state;
+            const { target, hand, isWon } = state;
             const { person: selected } = action;
-            let isWon = false;
+            let updatedIsWon = isWon;
+
+            if (isWon) return state;            
 
             if (selected.id === target.id) {
-                isWon = true;
+                updatedIsWon = true;
             }
 
             const updatedHand = hand.map(person => {
@@ -49,7 +51,7 @@ const gameReducer = (state = initialState, action) => {
             return { ...state,
                 timer: 0,
                 hand: updatedHand,
-                isWon
+                isWon: updatedIsWon
             };
         }
         case REQUEST_PEOPLE:
