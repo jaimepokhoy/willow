@@ -11,7 +11,7 @@ const Person = ({ details, personSelect }) => {
     return (
         <Col md={2}>
             <div onClick={personSelect} className={visibleClass}>
-                <Image src={headshot.url} rounded responsive />
+                <Image src={headshot.url || 'avatar.png'} rounded responsive />
                 {clicked && 
                     <h4 className={colorClass}>{firstName} {lastName}</h4>
                 }

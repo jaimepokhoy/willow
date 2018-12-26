@@ -73,8 +73,18 @@ const gameReducer = (state = initialState, action) => {
             }
         }
         case CHANGE_MODE: {
+            const { mode } = action;
+            const { people } = state;
+
+            let newPeople = [...people];
+
+            if (mode === 'Team') {
+                newPeople = people.filter(person => person.jobTitle);
+            }
+
             return { ...state,
-                gameMode: action.mode
+                gameMode: action.mode,
+                people: newPeople
             };
         }
         case GIVE_HINT: {
