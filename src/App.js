@@ -40,7 +40,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    onModeChange: mode => dispatch(modeChange(mode))
+    onModeChange: mode => dispatch(modeChange(mode.name))
   }
 }
 

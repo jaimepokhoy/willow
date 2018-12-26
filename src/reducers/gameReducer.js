@@ -11,11 +11,22 @@ const initialState = {
     loading: false,
     gameMode: 'Classic',
     gameModes: [
-        'Classic',
-        'Hint',
-        'Mat(*)',
-        'Hard',
-        'Team'
+        {
+            name: 'Classic',
+            desc: 'Name says it all'
+        }, {
+            name: 'Hint',
+            desc: 'Incorrect options will disappear after 5 seconds'
+        }, {
+            name: 'Mat(*)',
+            desc: 'Show only Mat*\'s'
+        }, {
+            name: 'Team',
+            desc: 'Show only current team members'
+        }, {
+            name: 'Hard',
+            desc: 'Incorrect selections are replaced by another incorrect options, then shuffled'
+        }
     ]
 }
 
@@ -79,10 +90,11 @@ const gameReducer = (state = initialState, action) => {
             const { people } = state;
 
             let newPeople = [...people];
+            console.log(mode);
 
-            if (mode === 'Team') {
+            if (mode.name === 'Team') {
                 newPeople = people.filter(person => person.jobTitle);
-            } else if (mode === 'Mat(*)') {
+            } else if (mode.name === 'Mat(*)') {
                 newPeople = people.filter(person => person.firstName.startsWith('Mat'));
             }
 

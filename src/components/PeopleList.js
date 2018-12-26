@@ -8,7 +8,7 @@ import { giveHint } from '../actions';
 
 class PeopleList extends Component {
     componentDidMount() {
-        this.props.setInterval(this.props.onGiveHint, 10000);
+        this.props.setInterval(this.props.onGiveHint, 5000);
     }
     
     render() {
