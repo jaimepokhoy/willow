@@ -1,4 +1,4 @@
-import { REQUEST_SUCCESS, REQUEST_PEOPLE, SELECT_PERSON, NEXT_ROUND, CHANGE_MODE } from './../actions';
+import { REQUEST_SUCCESS, REQUEST_PEOPLE, SELECT_PERSON, NEXT_ROUND, CHANGE_MODE, GIVE_HINT } from './../actions';
 import shuffle from 'lodash/shuffle';
 import random from 'lodash/random';
 
@@ -47,6 +47,7 @@ const gameReducer = (state = initialState, action) => {
             });
 
             return { ...state,
+                timer: 0,
                 hand: updatedHand,
                 isWon
             };
@@ -62,7 +63,7 @@ const gameReducer = (state = initialState, action) => {
             const { currPag, people } = state;
             const start = currPag * 5;
             const end = start + 5;
-            const hand = shuffle(people.slice(start, end));
+            const hand = shuffle(people.slice(start, end)).map(person => Object.assign(person, { visible: true }));
 
             return { ...state,
                 hand,
@@ -74,6 +75,23 @@ const gameReducer = (state = initialState, action) => {
         case CHANGE_MODE: {
             return { ...state,
                 gameMode: action.mode
+            };
+        }
+        case GIVE_HINT: {
+            const { hand, target, gameMode } = state;
+            const tempHand = [...hand];
+
+            if (gameMode !== 'Hint') return state;
+
+            for (let i = 0; i < 5; i++) {
+                if (tempHand[i].visible && tempHand[i].id !== target.id) {
+                    tempHand[i].visible = false;
+                    break;
+                }
+            }
+
+            return { ...state, 
+                hand: tempHand
             };
         }
         default:

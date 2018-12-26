@@ -11,3 +11,10 @@
   color: rgb(125, 166, 134);
   transition: all .3s linear;
 }
+
+.invisible {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s 2s,
+  opacity 2s linear;
+}

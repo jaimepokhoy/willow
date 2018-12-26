@@ -13,6 +13,7 @@
     "react-redux": "^6.0.0",
     "react-scripts": "2.1.1",
     "react-spinners": "^0.4.8",
+    "react-timeout": "^1.1.2",
     "redux": "^4.0.1",
     "redux-saga": "^0.16.2"
   },
