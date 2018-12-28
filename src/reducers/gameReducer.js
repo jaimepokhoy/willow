@@ -33,11 +33,21 @@ const initialState = {
     ]
 }
 
+const getRandomPerson = (people, hand, target) => {
+    const randomPerson = Object.assign({}, people[random(people.length)], { clicked: false });
+    if ([...hand, target].find(person => person.id === randomPerson.id)) {
+        return getRandomPerson(people, hand, target);
+    } else {
+        return randomPerson;
+    }
+};
+
 const gameReducer = (state = initialState, action) => {
     switch(action.type) {
         case SELECT_PERSON: {
-            const { target, hand, isWon } = state;
+            const { target, hand, isWon, people, gameMode } = state;
             const { person: selected } = action;
+            let random = {};
             let updatedIsWon = isWon;
 
             if (isWon) return state;            
@@ -46,21 +56,25 @@ const gameReducer = (state = initialState, action) => {
                 updatedIsWon = true;
             }
 
-            const updatedHand = hand.map(person => {
+            let updatedHand = hand.map(person => {
                 if (person.id === selected.id && person.id === target.id) {
                     return Object.assign({}, person, {
                         clicked: true,
                         isTarget: true
                     })
                 } else if (person.id === selected.id) {
+                    if (gameMode=== 'Hard') random = getRandomPerson(people, hand, target);
+
                     return Object.assign({}, person, {
                         clicked: true
-                    })
+                    }, random);
                 } else {
                     return person;
                 }
 
             });
+
+            if (gameMode === 'Hard' && !updatedIsWon) updatedHand = shuffle(updatedHand);
 
             return { ...state,
                 timer: 0,
@@ -94,9 +108,9 @@ const gameReducer = (state = initialState, action) => {
 
             let newPeople = [...people];
 
-            if (mode.name === 'Team') {
+            if (mode === 'Team') {
                 newPeople = people.filter(person => person.jobTitle);
-            } else if (mode.name === 'Mat(*)') {
+            } else if (mode === 'Mat(*)') {
                 newPeople = people.filter(person => person.firstName.startsWith('Mat'));
             }
 
