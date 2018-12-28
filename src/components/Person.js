@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Col, Image } from 'react-bootstrap';
-import KeyHandler, { KEYPRESS } from 'react-key-handler';
+import KeyStroke from '../hocs/KeyStroke';
 
 const Person = ({ details, personSelect, index }) => {
     const { clicked, firstName, lastName, headshot, isTarget, visible } = details;
@@ -11,10 +11,9 @@ const Person = ({ details, personSelect, index }) => {
 
     return (
         <Col md={2}>
-            <KeyHandler
-                keyEventName={KEYPRESS}
-                keyValue={index}
-                onKeyHandle={personSelect}
+            <KeyStroke
+                value={index}
+                handler={personSelect}
             />
             <div onClick={personSelect} className={visibleClass}>
                 <Image src={headshot.url || 'avatar.png'} rounded responsive />
