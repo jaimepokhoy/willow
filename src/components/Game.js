@@ -4,15 +4,10 @@ import Winner from './Winner';
 import { connect } from 'react-redux';
 import { REQUEST_PEOPLE, makeSelection, nextRound } from '../actions';
 import PropTypes from 'prop-types';
-import { css } from 'react-emotion';
-import { ClipLoader } from 'react-spinners';
 import './../App.css';
+import Loader from '../hocs/Loader';
 
-const override = css `
-    display: block;
-    margin: 0 auto;
-    border-color: red;
-`;
+
 
 class Game extends Component {
     componentDidMount() {
@@ -30,12 +25,7 @@ class Game extends Component {
             <div>
                 {hand.length && <h1>Who is {target.firstName} {target.lastName}</h1>}
                 {loading ? (
-                    <div className='center'>
-                        <ClipLoader
-                            className={override}
-                            loading={true}
-                        />
-                    </div>
+                    <Loader loading={loading} />
                 ) : (
                     <PeopleList hand={hand} handleSelect={onHandleSelect} />
                 )}

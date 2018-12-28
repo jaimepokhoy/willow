@@ -1,4 +1,4 @@
-import { REQUEST_SUCCESS, REQUEST_PEOPLE, SELECT_PERSON, NEXT_ROUND, CHANGE_MODE, GIVE_HINT } from './../actions';
+import { REQUEST_SUCCESS, REQUEST_PEOPLE, SELECT_PERSON, NEXT_ROUND, CHANGE_MODE, GIVE_HINT, REQUEST_ERROR } from './../actions';
 import shuffle from 'lodash/shuffle';
 import random from 'lodash/random';
 import { getRandomPerson } from '../helpers';
@@ -80,6 +80,11 @@ const gameReducer = (state = initialState, action) => {
             return { ...state,
                 loading: false,
                 people: action.people,
+            };
+        case REQUEST_ERROR:
+            return { ...state,
+                loading: false,
+                error: action.error
             };
         case NEXT_ROUND: {
             const { currPag, people } = state;
