@@ -24,8 +24,11 @@ const initialState = {
             name: 'Team',
             desc: 'Show only current team members'
         }, {
+            name: 'Reversed',
+            desc: 'Show a single picture, and choose from 5 names'
+        }, {
             name: 'Hard',
-            desc: 'Incorrect selections are replaced by another incorrect options, then shuffled'
+            desc: 'Incorrect selections are replaced by another incorrect option, then shuffled'
         }
     ]
 }
@@ -90,7 +93,6 @@ const gameReducer = (state = initialState, action) => {
             const { people } = state;
 
             let newPeople = [...people];
-            console.log(mode);
 
             if (mode.name === 'Team') {
                 newPeople = people.filter(person => person.jobTitle);
