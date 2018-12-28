@@ -14,8 +14,8 @@ class PeopleList extends Component {
     render() {
         const { hand, handleSelect } = this.props;
 
-        const listItems = hand.map(person => (
-            <Person key={person.id} details={person} personSelect={() => handleSelect(person)}/>
+        const listItems = hand.map((person, index) => (
+            <Person key={person.id} index={`${index + 1}`} details={person} personSelect={() => handleSelect(person)}/>
         ));
         
         return (
