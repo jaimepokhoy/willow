@@ -1,6 +1,7 @@
 import { REQUEST_SUCCESS, REQUEST_PEOPLE, SELECT_PERSON, NEXT_ROUND, CHANGE_MODE, GIVE_HINT } from './../actions';
 import shuffle from 'lodash/shuffle';
 import random from 'lodash/random';
+import { getRandomPerson } from '../helpers';
 
 const initialState = {
     people: [],
@@ -32,15 +33,6 @@ const initialState = {
         }
     ]
 }
-
-const getRandomPerson = (people, hand, target) => {
-    const randomPerson = Object.assign({}, people[random(people.length)], { clicked: false });
-    if ([...hand, target].find(person => person.id === randomPerson.id)) {
-        return getRandomPerson(people, hand, target);
-    } else {
-        return randomPerson;
-    }
-};
 
 const gameReducer = (state = initialState, action) => {
     switch(action.type) {
