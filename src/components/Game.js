@@ -26,7 +26,7 @@ class Game extends Component {
                 {loading ? (
                     <Loader loading={loading} />
                 ) : (
-                    <PeopleList hand={hand} handleSelect={onHandleSelect} />
+                    <PeopleList hand={hand} handleSelect={onHandleSelect} gameMode={gameMode} />
                 )}
                 {isWon && <Winner handleNext={onNextRound} />}
             </div>
@@ -35,6 +35,7 @@ class Game extends Component {
 }
 
 Game.propTypes = {
+    gameMode: PropTypes.string,
     hand: PropTypes.array,
     isWon: PropTypes.bool,
     loading: PropTypes.bool,

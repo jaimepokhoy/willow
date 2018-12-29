@@ -12,10 +12,16 @@ class PeopleList extends Component {
     }
     
     render() {
-        const { hand, handleSelect } = this.props;
+        const { hand, handleSelect, gameMode } = this.props;
 
         const listItems = hand.map((person, index) => (
-            <Person key={person.id} index={`${index + 1}`} details={person} personSelect={() => handleSelect(person)}/>
+            <Person
+                key={person.id}
+                showName={gameMode === 'Reversed'}
+                index={`${index + 1}`}
+                details={person}
+                personSelect={() => handleSelect(person)}
+            />
         ));
         
         return (
@@ -29,6 +35,7 @@ class PeopleList extends Component {
 }
 
 PeopleList.propTypes = {
+    gameMode: PropTypes.string,
     hand: PropTypes.array,
     handleSelect: PropTypes.func,
     onGiveHint: PropTypes.func,

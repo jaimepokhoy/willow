@@ -2,12 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Col, Image } from 'react-bootstrap';
 import KeyStroke from '../hocs/KeyStroke';
+import Reveal from './Reveal';
 
-const Person = ({ details, personSelect, index }) => {
-    const { clicked, firstName, lastName, headshot, isTarget, visible } = details;
+const Person = ({ details, personSelect, index, showName }) => {
+    const { clicked, firstName, lastName, headshot, visible } = details;
 
-    const colorClass = clicked && isTarget ? 'green' : 'red';
     const visibleClass = !visible ? 'invisible' : '';
+    const fullName = `${firstName} ${lastName}`;
 
     return (
         <Col md={2}>
@@ -16,9 +17,10 @@ const Person = ({ details, personSelect, index }) => {
                 handler={personSelect}
             />
             <div onClick={personSelect} className={visibleClass}>
-                <Image src={headshot.url || 'avatar.png'} rounded responsive />
+                {showName ? <h3>{fullName}</h3> : <Image src={headshot.url || 'avatar.png'} rounded responsive />
+                }
                 {clicked && 
-                    <h4 className={colorClass}>{firstName} {lastName}</h4>
+                    <Reveal person={details} showName={showName} />
                 }
             </div>
         </Col>
@@ -28,7 +30,8 @@ const Person = ({ details, personSelect, index }) => {
 Person.propTypes = {
     details: PropTypes.object,
     index: PropTypes.string,
-    personSelect: PropTypes.func
+    personSelect: PropTypes.func,
+    showName: PropTypes.bool
 }
 
 export default Person;
