@@ -7,6 +7,9 @@ const initialState = {
     people: [],
     hand: [],
     currPag: 0,
+    numberCorrect: 0,
+    numberIncorrect: 0,
+    originalPeople: [],
     isWon: false,
     target: null,
     loading: false,
@@ -14,7 +17,7 @@ const initialState = {
     gameModes: [
         {
             name: 'Classic',
-            desc: 'Name says it all'
+            desc: 'Click on corresponding picture'
         }, {
             name: 'Hint',
             desc: 'Incorrect options will disappear after 5 seconds'
@@ -56,15 +59,21 @@ const updateHand = ({ hand, selected, gameMode, target, people }) => hand.map(pe
 const gameReducer = (state = initialState, action) => {
     switch(action.type) {
         case SELECT_PERSON: {
-            const { target, hand, isWon, people, gameMode } = state;
+            const { target, hand, isWon, people, gameMode, numberCorrect, numberIncorrect } = state;
             const { person: selected } = action;
             let updatedIsWon = isWon;
+            let updatedCorrect = numberCorrect;
+            let updatedIncorrect = numberIncorrect;
 
             if (isWon)
                 return state;            
 
-            if (selected.id === target.id)
+            if (selected.id === target.id) {
                 updatedIsWon = true;
+                updatedCorrect++;
+            } else {
+                updatedIncorrect++;
+            }
 
             let updatedHand = updateHand({ hand, selected, gameMode, target, people });
 
@@ -73,6 +82,8 @@ const gameReducer = (state = initialState, action) => {
 
             return { ...state,
                 timer: 0,
+                numberCorrect: updatedCorrect,
+                numberIncorrect: updatedIncorrect,
                 hand: updatedHand,
                 isWon: updatedIsWon
             };
@@ -82,6 +93,7 @@ const gameReducer = (state = initialState, action) => {
         case REQUEST_SUCCESS:
             return { ...state,
                 loading: false,
+                originalPeople: action.people,
                 people: action.people,
             };
         case REQUEST_ERROR:
@@ -104,14 +116,14 @@ const gameReducer = (state = initialState, action) => {
         }
         case CHANGE_MODE: {
             const { mode } = action;
-            const { people } = state;
+            const { originalPeople } = state;
 
-            let newPeople = [...people];
+            let newPeople = [...originalPeople];
 
             if (mode === 'Team') {
-                newPeople = people.filter(person => person.jobTitle);
+                newPeople = originalPeople.filter(person => person.jobTitle);
             } else if (mode === 'Mat(*)') {
-                newPeople = people.filter(person => person.firstName.startsWith('Mat'));
+                newPeople = originalPeople.filter(person => person.firstName.startsWith('Mat'));
             }
 
             return { ...state,

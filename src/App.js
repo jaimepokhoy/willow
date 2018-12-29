@@ -5,10 +5,11 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Game from './components/Game';
 import { modeChange } from './actions';
+import ScoreBoard from './components/ScoreBoard';
 
 class App extends Component {
   render() {
-    const { gameMode, gameModes, onModeChange } = this.props;
+    const { gameMode, gameModes, onModeChange, numberCorrect, numberIncorrect } = this.props;
 
     return (
       <Grid>
@@ -16,6 +17,7 @@ class App extends Component {
           <Col xs={4} md={2}>
             <h3>Name Game</h3>
             <ModeList gameMode={gameMode} gameModes={gameModes} handleSelect={onModeChange} />
+            <ScoreBoard correct={numberCorrect} incorrect={numberIncorrect} />
           </Col>
           <Col xs={14} md={10}>
             <Game />
@@ -29,13 +31,15 @@ class App extends Component {
 App.propTypes = {
   gameMode: PropTypes.string,
   gameModes: PropTypes.array,
+  numberCorrect: PropTypes.number,
+  numberIncorrect: PropTypes.number,
   onModeChange: PropTypes.func
 };
 
 function mapStateToProps(state) {
-  const { gameMode, gameModes } = state;
+  const { gameMode, gameModes, numberCorrect, numberIncorrect } = state;
 
-  return { gameMode, gameModes };
+  return { gameMode, gameModes, numberCorrect, numberIncorrect };
 }
 
 function mapDispatchToProps(dispatch) {

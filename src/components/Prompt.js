@@ -4,12 +4,13 @@ import PropTypes from 'prop-types';
 
 const Prompt = ({ target, gameMode }) => {
     const { firstName, lastName, headshot } = target;
+    const fullName = `${firstName} ${lastName}`;
 
     return (
         <PageHeader>
-        <h1>Who is</h1>
+            Who is 
             {gameMode === 'Reversed' ? <div><Image src={headshot.url} rounded thumbnail responsive /></div> :
-            <h1 className='blue'>{`${firstName} ${lastName}`}</h1>}
+            <div><h2 className='blue'>{fullName}</h2></div>}
         </PageHeader>
     )
 }
