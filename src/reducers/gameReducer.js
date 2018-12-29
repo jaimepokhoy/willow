@@ -34,39 +34,42 @@ const initialState = {
     ]
 }
 
+const updateHand = ({ hand, selected, gameMode, target, people }) => hand.map(person => {
+    let random = {};
+
+    if (person.id === selected.id && person.id === target.id) {
+        return Object.assign({}, person, {
+            clicked: true,
+            isTarget: true
+        })
+    } else if (person.id === selected.id) {
+        if (gameMode === 'Hard') random = getRandomPerson(people, hand, target);
+
+        return Object.assign({}, person, {
+            clicked: true
+        }, random);
+    } else {
+        return person;
+    }
+});
+
 const gameReducer = (state = initialState, action) => {
     switch(action.type) {
         case SELECT_PERSON: {
             const { target, hand, isWon, people, gameMode } = state;
             const { person: selected } = action;
-            let random = {};
             let updatedIsWon = isWon;
 
-            if (isWon) return state;            
+            if (isWon)
+                return state;            
 
-            if (selected.id === target.id) {
+            if (selected.id === target.id)
                 updatedIsWon = true;
-            }
 
-            let updatedHand = hand.map(person => {
-                if (person.id === selected.id && person.id === target.id) {
-                    return Object.assign({}, person, {
-                        clicked: true,
-                        isTarget: true
-                    })
-                } else if (person.id === selected.id) {
-                    if (gameMode=== 'Hard') random = getRandomPerson(people, hand, target);
+            let updatedHand = updateHand({ hand, selected, gameMode, target, people });
 
-                    return Object.assign({}, person, {
-                        clicked: true
-                    }, random);
-                } else {
-                    return person;
-                }
-
-            });
-
-            if (gameMode === 'Hard' && !updatedIsWon) updatedHand = shuffle(updatedHand);
+            if (gameMode === 'Hard' && !updatedIsWon)
+                updatedHand = shuffle(updatedHand);
 
             return { ...state,
                 timer: 0,
