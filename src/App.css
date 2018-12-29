@@ -12,6 +12,10 @@
   transition: all .3s linear;
 }
 
+.blue {
+  color: rgb(67, 116, 165);
+}
+
 .invisible {
   visibility: hidden;
   opacity: 0;
