@@ -6,8 +6,7 @@ import { REQUEST_PEOPLE, makeSelection, nextRound } from '../actions';
 import PropTypes from 'prop-types';
 import './../App.css';
 import Loader from '../hocs/Loader';
-
-
+import Prompt from './Prompt';
 
 class Game extends Component {
     componentDidMount() {
@@ -19,11 +18,11 @@ class Game extends Component {
     }
 
     render() {
-        const { onHandleSelect, hand, loading, target, isWon, onNextRound } = this.props;
+        const { onHandleSelect, hand, loading, target, isWon, onNextRound, gameMode } = this.props;
 
         return (
             <div>
-                {hand.length && <h1>Who is {target.firstName} {target.lastName}</h1>}
+                {hand.length && <Prompt target={target} gameMode={gameMode} />}
                 {loading ? (
                     <Loader loading={loading} />
                 ) : (
@@ -47,9 +46,9 @@ Game.propTypes = {
 };
 
 function mapStateToProps(state) {
-    const { people, hand, target, isWon, loading } = state;
+    const { people, hand, target, isWon, loading, gameMode } = state;
 
-    return { people, hand, target, isWon, loading };
+    return { people, hand, target, isWon, loading, gameMode };
 }
 
 function mapDispatchToProps(dispatch) {
