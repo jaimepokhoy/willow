@@ -1,3 +1,5 @@
+This is a game I built to help learn names from a group of people.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
